@@ -223,22 +223,22 @@ gint KeyPress(GtkWidget *widget, GdkEventKey *event, gpointer arg)
                   }
                    nLine+=fullRow;  //????????
                   if(fullRow!=0) {
-                  if(nLine<=2)
+                  if(nLine<=20)
                   {
                       nLevel=1;
                       mytimer=1000;
                     }
-                  else if(nLine<=4)
+                  else if(nLine<=40)
                   {
                       nLevel=2;
                       mytimer=800;
                   }
-                  else if(nLine <=6)
+                  else if(nLine <=60)
                   {
                       nLevel=3;
                       mytimer=600;
                   }
-                   else if(nLine<=8)
+                   else if(nLine<=80)
                   {
                       nLevel=4;
                       mytimer=400;
