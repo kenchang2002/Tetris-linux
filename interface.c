@@ -1,16 +1,16 @@
 /*******************************************************************************
- 20200513 ÕÅöÎ 
- ¸ÃÎÄ¼şÎª³ÌĞòÖ÷Èë¿Ú£¬Í¬Ê±Ò²ÊÇÖ÷½çÃæ³õÊ¼»¯µÄµØ·½¡£gtkµÄÍ¼ĞÎ½çÃæÈç¹ûÊÇÓÃ´¿±àÂë
- µÄ·½Ê½¹¹½¨£¬Ô­ÔòÉÏÊÇÏÈ½«ÄãµÄ½çÃæÇøÓò»®·Ö³É¸÷¸öĞ¡¿é£¬×îºó²Å×é³ÉÒ»¸ö´óµÄ¡£
+ 20200513 å¼ é‘« 
+ è¯¥æ–‡ä»¶ä¸ºç¨‹åºä¸»å…¥å£ï¼ŒåŒæ—¶ä¹Ÿæ˜¯ä¸»ç•Œé¢åˆå§‹åŒ–çš„åœ°æ–¹ã€‚gtkçš„å›¾å½¢ç•Œé¢å¦‚æœæ˜¯ç”¨çº¯ç¼–ç 
+ çš„æ–¹å¼æ„å»ºï¼ŒåŸåˆ™ä¸Šæ˜¯å…ˆå°†ä½ çš„ç•Œé¢åŒºåŸŸåˆ’åˆ†æˆå„ä¸ªå°å—ï¼Œæœ€åæ‰ç»„æˆä¸€ä¸ªå¤§çš„ã€‚
  *******************************************************************************/
 
 #include "display.h"  
 #include "control.h"
 #include "menu.h"
 
-GtkWidget *game_area, *nextbrick_area;     /*ÓÎÏ·»æÍ¼ÇøÒÔ¼°ÌáÊ¾»æÍ¼Çø*/
+GtkWidget *game_area, *nextbrick_area;     /*æ¸¸æˆç»˜å›¾åŒºä»¥åŠæç¤ºç»˜å›¾åŒº*/
 GtkWidget *nextbrick_label, *record_label,*level_label,*score_label,*line_label ,*time_label;
-/*20200513-01 start: ÕÅöÎ ÔÚ½çÃæÔö¼ÓÒ»¸öÏÔÊ¾ÓÎÏ·Ê±³¤µÄĞ¡´°¿Ú,ÏÈÔÚÉÏÃæ³É¼¨È¥Í¨¹ıtime_lableÊµÏÖ*/
+/*20200513-01 start: å¼ é‘« åœ¨ç•Œé¢å¢åŠ ä¸€ä¸ªæ˜¾ç¤ºæ¸¸æˆæ—¶é•¿çš„å°çª—å£,å…ˆåœ¨ä¸Šé¢æˆç»©å»é€šè¿‡time_lableå®ç°*/
  gboolean deal_time();
 /*20200513-01 end:                                                                                        */
 KeyArg arg;
@@ -37,50 +37,50 @@ int main( int argc, char *argv[])
 
     vbox1=gtk_vbox_new(FALSE,0);
     vbox2=gtk_vbox_new(FALSE,0);
-    /*20191225-ÕÅöÎ£ºÕâÀïÊ×²ÎÊıÎªTRUE±íÊ¾Õâ¸öboxÀïÃæµÄ¿Ø¼ş¾ßÓĞÏàÍ¬¸ß¶È,Òò´ËÏà»¥ÓĞÓ°Ïì*/
+    /*20191225-å¼ é‘«ï¼šè¿™é‡Œé¦–å‚æ•°ä¸ºTRUEè¡¨ç¤ºè¿™ä¸ªboxé‡Œé¢çš„æ§ä»¶å…·æœ‰ç›¸åŒé«˜åº¦,å› æ­¤ç›¸äº’æœ‰å½±å“*/
     vbox3=gtk_vbox_new(FALSE,0);
     vbox4=gtk_vbox_new(TRUE,0);
     hbox=gtk_hbox_new(TRUE,0);
 
     menubar = gtk_menu_bar_new();
-    /*½¨Á¢¡°ÓÎÏ·¡±,"°ïÖú"²Ëµ¥ÏîÈİÆ÷  */
+    /*å»ºç«‹â€œæ¸¸æˆâ€,"å¸®åŠ©"èœå•é¡¹å®¹å™¨  */
     gamemenu = gtk_menu_new();
     helpmenu= gtk_menu_new();
 
-    /*½¨Á¢¿ì½İ¼üÈİÆ÷*/
+    /*å»ºç«‹å¿«æ·é”®å®¹å™¨*/
     accel_group = gtk_accel_group_new();
     gtk_window_add_accel_group(GTK_WINDOW(window), accel_group);
 
-    /*¡°ÓÎÏ·¡±²Ëµ¥¸÷²Ëµ¥Ïî*/
+    /*â€œæ¸¸æˆâ€èœå•å„èœå•é¡¹*/
     game = gtk_menu_item_new_with_mnemonic("Game(_G)");
     newgame = gtk_menu_item_new_with_mnemonic("Newgame(_N)");
-    sep = gtk_separator_menu_item_new();//·Ö¸ôÏß
+    sep = gtk_separator_menu_item_new();//åˆ†éš”çº¿
     quit = gtk_menu_item_new_with_mnemonic("Quit(_Q)");
 
-    /*´´½¨¡°ÓÎÏ·¡±²Ëµ¥¸÷²Ëµ¥Ïî¿ì½İ¼ü*/
+    /*åˆ›å»ºâ€œæ¸¸æˆâ€èœå•å„èœå•é¡¹å¿«æ·é”®*/
     gtk_widget_add_accelerator(newgame, "activate", accel_group,
       GDK_N, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
     gtk_widget_add_accelerator(quit, "activate", accel_group,
       GDK_Q, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-    /*"ÓÎÏ·"²Ëµ¥¸÷²Ëµ¥ÏîÓë¡°ÓÎÏ·¡±²Ëµ¥¹ØÁª*/
+    /*"æ¸¸æˆ"èœå•å„èœå•é¡¹ä¸â€œæ¸¸æˆâ€èœå•å…³è”*/
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(game), gamemenu);
     gtk_menu_append(GTK_MENU_SHELL(gamemenu), newgame);
     gtk_menu_append(GTK_MENU_SHELL(gamemenu), sep);
     gtk_menu_append(GTK_MENU_SHELL(gamemenu), quit);
 
-    /*Á¬½Ó¡°ÓÎÏ·¡±²Ëµ¥Ïî´¦Àíº¯Êı*/
+    /*è¿æ¥â€œæ¸¸æˆâ€èœå•é¡¹å¤„ç†å‡½æ•°*/
     g_signal_connect (G_OBJECT(newgame),"activate",
                                     G_CALLBACK(NewGame), &arg);
     g_signal_connect(G_OBJECT(quit), "activate",
                                     G_CALLBACK(gtk_main_quit), NULL);
 
-    /*´´½¨¡°°ïÖú¡±²Ëµ¥¸÷²Ëµ¥Ïî*/
+    /*åˆ›å»ºâ€œå¸®åŠ©â€èœå•å„èœå•é¡¹*/
     help= gtk_menu_item_new_with_mnemonic("Help(_H)");
     content= gtk_menu_item_new_with_mnemonic("Content(_C)");
     sep = gtk_separator_menu_item_new();
     about= gtk_menu_item_new_with_mnemonic("About(_A)");
 
-    /*"°ïÖú"²Ëµ¥¸÷²Ëµ¥ÏîÓë¡°°ïÖú¡±²Ëµ¥¹ØÁª*/
+    /*"å¸®åŠ©"èœå•å„èœå•é¡¹ä¸â€œå¸®åŠ©â€èœå•å…³è”*/
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(help), helpmenu);
     gtk_menu_append(GTK_MENU_SHELL(helpmenu), content);
     gtk_menu_append(GTK_MENU_SHELL(helpmenu),sep);
@@ -90,36 +90,36 @@ int main( int argc, char *argv[])
                                     G_CALLBACK(HelpContent), NULL);
     g_signal_connect (G_OBJECT(about),"activate",
                                     G_CALLBACK(About), NULL);
-    /*°Ñ²Ëµ¥·Åµ½²Ëµ¥À¸ÉÏ*/
+    /*æŠŠèœå•æ”¾åˆ°èœå•æ ä¸Š*/
     gtk_menu_bar_append(GTK_MENU_SHELL(menubar), game);
     gtk_menu_bar_append(GTK_MENU_SHELL(menubar), help);
-    /*½«²Ëµ¥À¸×é×°µ½vbox1*/
+    /*å°†èœå•æ ç»„è£…åˆ°vbox1*/
     gtk_box_pack_start(GTK_BOX(vbox1), menubar, FALSE, FALSE, 0);
-    /*20191225-ÕÅöÎ£ºÕâÀï×îºóÒ»¸ö²ÎÊı20±íÊ¾vboxºÍ´°¿Úvbox1ÉÏ±ßÔµÖ®¼äµÄ¾àÀëÊÇ20¸öÏñËØ*/
+    /*20191225-å¼ é‘«ï¼šè¿™é‡Œæœ€åä¸€ä¸ªå‚æ•°20è¡¨ç¤ºvboxå’Œçª—å£vbox1ä¸Šè¾¹ç¼˜ä¹‹é—´çš„è·ç¦»æ˜¯20ä¸ªåƒç´ */
 
-    /*´´½¨ÓÎÏ·»æÍ¼Çø*/
+    /*åˆ›å»ºæ¸¸æˆç»˜å›¾åŒº*/
     game_area=gtk_drawing_area_new();
     gtk_drawing_area_size ((GtkDrawingArea *)game_area,GAMEAREAWIDTH,GAMEAREAHEIGHT);
-    /*½«»æÍ¼Çø×é×°µ½Ë®Æ½ºĞ×Ó*/
+    /*å°†ç»˜å›¾åŒºç»„è£…åˆ°æ°´å¹³ç›’å­*/
     gtk_box_pack_start(GTK_BOX(hbox), game_area, FALSE, FALSE, 10);
 
-    /*ÏÂÒ»·½¿éÌáÊ¾Çø*/
+    /*ä¸‹ä¸€æ–¹å—æç¤ºåŒº*/
     nextbrick_label=gtk_label_new("next brick");
     gtk_box_pack_start(GTK_BOX(vbox3), nextbrick_label, TRUE, TRUE, 0);
 
-    /*´´½¨ÏÔÊ¾ÏÂÒ»·½¿é»æÍ¼Çø*/
+    /*åˆ›å»ºæ˜¾ç¤ºä¸‹ä¸€æ–¹å—ç»˜å›¾åŒº*/
     nextbrick_area=gtk_drawing_area_new();
     gtk_drawing_area_size ((GtkDrawingArea *)nextbrick_area,NEXTAREAWIDTH,NEXTAREAHEIGHT);
 
     gtk_box_pack_start(GTK_BOX(vbox3), nextbrick_area, FALSE, FALSE, 10);
     gtk_box_pack_start(GTK_BOX(vbox2), vbox3, FALSE, FALSE, 0);
 
-    /*³É¼¨Çø*/
+    /*æˆç»©åŒº*/
     record_label=gtk_label_new("Record:");
     level_label=gtk_label_new("Level:");
     line_label=gtk_label_new("Line:");
     score_label=gtk_label_new("Score:");
-   /*20200513 start :ÕÅöÎ ¸Ä±ä±êÇ©ÑÕÉ«*/
+   /*20200513 start :å¼ é‘« æ”¹å˜æ ‡ç­¾é¢œè‰²*/
     time_label=gtk_label_new("Time:");
     GdkColor color;
     gdk_color_parse ("blue", &color);
@@ -138,7 +138,7 @@ int main( int argc, char *argv[])
     gtk_box_pack_start(GTK_BOX(vbox1), hbox, FALSE, FALSE, 20);
     gtk_container_add(GTK_CONTAINER(window), vbox1);
 
-    //colormap=gtk_widget_get_colormap(game_area); 20191227-ÕÅöÎ£º»»µ½display.cÈ¥
+    //colormap=gtk_widget_get_colormap(game_area); 20191227-å¼ é‘«ï¼šæ¢åˆ°display.cå»
 
     gtk_widget_set_events (game_area, GDK_STRUCTURE_MASK|
                         GDK_EXPOSURE_MASK
@@ -164,8 +164,6 @@ int main( int argc, char *argv[])
 
     gtk_widget_show_all(window);
     gtk_main();
-     //20200514-1£ºstart ÕÅöÎ ÏÔÊ¾ÓÎÏ·Ê±³¤ĞÅÏ¢ start,µ«ºÃÏñÊÜÊ±¼ä±ä¿ìÓ°Ïì
-    g_timeout_add(1000, (GSourceFunc)deal_time,NULL);
-    //20200514-1£ºend
+
     return 0;
 }
