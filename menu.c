@@ -10,21 +10,27 @@ extern guint g_curbricky;
 extern GtkWidget *nextbrick_label,*record_label,*level_label,*score_label,*line_label;
 extern gint g_Filled[XMAX][YMAX];
 void deal_time();
+extern guint g_count;
 
 guint tid = 0;
 guint mytimer = 1000;
 
 gint NewGame(GtkWidget *widget,gpointer data){
-	 /*2020 张鑫 显示时间信息,但好像受时间变快影响*/
-    g_timeout_add(1000, (GSourceFunc)deal_time,NULL);
-	
-	//20200103-张鑫：解决上次游戏块不清0的bug
+	 /*20200521 张鑫 start:显示时间信息,但好像受时间变快影响*/
+        guint ken_tid =0;
+        gint NewGame(GtkWidget *widget,gpointer data){
+	g_count = 0;
+	if(ken_tid)
+		g_source_remove (ken_tid);
+        ken_tid=g_timeout_add(1000, (GSourceFunc)deal_time,NULL);
+	/*20200521 张鑫 end:显示时间信息,但好像受时间变快影响*/
+	//20200103-张鑫：start:解决上次游戏块不清0的bug
 	for(gint i=0;i<XMAX;i++) {
 		for(gint j=0;j<YMAX;j++) {
 			g_Filled[i][j] = 0;
 		}
 	}
-	
+	//20200103-张鑫：end:解决上次游戏块不清0的bug
 	KeyArg *arg = (KeyArg *)data;
     gtk_widget_queue_draw(arg->game_area );
     //////////////////////////////////////////////////////////
